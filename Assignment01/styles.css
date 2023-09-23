@@ -70,3 +70,14 @@
 .bd-mode-toggle {
     z-index: 1500;
 }
+
+
+p.paddingAbout {
+    padding-left: 2cm;
+    padding-right: 2cm;
+}
+h1.paddingAbout {
+    font-weight: 349;
+    padding-left: 2cm;
+    padding-right: 2cm;
+}
