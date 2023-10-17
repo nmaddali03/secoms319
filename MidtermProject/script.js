@@ -8,6 +8,15 @@ const canvas = document.getElementById("canvas");
 const resultText = document.getElementById("result-text");
 
 // Options values for buttons
+
+/** replace with this so that it is referencing the data from the json files
+let options = {
+  easy: "easy.JSON",
+  medium: "medium.JSON",
+  difficult: "difficult.JSON",
+};
+**/
+
 let options = {
   easy: [
     "apple",
@@ -81,14 +90,6 @@ let options = {
     "perspicacious"
   ],
 };
-
-/**
-let options = {
-  easy: "easy.JSON",
-  medium: "medium.JSON",
-  difficult: "difficult.JSON",
-};
-**/
 
 //count
 let winCount = 0;
