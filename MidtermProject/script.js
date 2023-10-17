@@ -1,4 +1,4 @@
-//Initial References
+// Initial References
 const letterContainer = document.getElementById("letter-container");
 const optionsContainer = document.getElementById("options-container");
 const userInputSection = document.getElementById("user-input-section");
@@ -7,7 +7,7 @@ const newGameButton = document.getElementById("new-game-button");
 const canvas = document.getElementById("canvas");
 const resultText = document.getElementById("result-text");
 
-//Options values for buttons
+// Options values for buttons
 let options = {
   easy: [
     "apple",
@@ -81,6 +81,14 @@ let options = {
     "perspicacious"
   ],
 };
+
+/**
+let options = {
+  easy: "easy.JSON",
+  medium: "medium.JSON",
+  difficult: "difficult.JSON",
+};
+**/
 
 //count
 let winCount = 0;
