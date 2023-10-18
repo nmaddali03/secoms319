@@ -1,40 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hangman</title>
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css" />
-    <style>
-        ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-        }
-        
-        li {
-        float: left;
-        }
-        
-        li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        }
-        
-        li a:hover {
-        background-color: #111;
-        }
-        </style>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hangman</title>
+        <!-- Google Fonts -->
+        <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet"
+        />
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="style.css" />
     </head>
 
     <body>
@@ -62,6 +37,12 @@
                 If the guessed letter is a part of the hidden word or phrase, then that letter will be appear in its
                 correct location of the set of dashes. If the guessed letter is not a part of the hidden word or
                 phrase, then an element of the hangman will appear.
+            </p> <br>
+            <p>
+                You will continue playing the game until they guess the hidden word or until there
+                are no more elements to add to the hangman. If all elements of the hangman are added,
+                then you have lost the game, and the hidden word or phrase will be revealed. If you guesse
+                the word without adding all hangman elements, then you have won.
             </p>
             <!-- Add more content as needed -->
         </div>
