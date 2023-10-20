@@ -7,89 +7,19 @@ const newGameButton = document.getElementById("new-game-button");
 const canvas = document.getElementById("canvas");
 const resultText = document.getElementById("result-text");
 
-// Options values for buttons
 
-/** replace with this so that it is referencing the data from the json files
+// Options values for buttons
 let options = {
   easy: "easy.JSON",
   medium: "medium.JSON",
   difficult: "difficult.JSON",
 };
-**/
 
-let options = {
-  easy: [
-    "apple",
-    "banana",
-    "cherry",
-    "dog",
-    "elephant",
-    "frog",
-    "grape",
-    "house",
-    "ice cream",
-    "jacket",
-    "kite",
-    "lemon",
-    "monkey",
-    "notebook",
-    "orange",
-    "penguin",
-    "quilt",
-    "rabbit",
-    "strawberry",
-    "turtle",
-    "umbrella",
-    "violin",
-    "watermelon",
-    "zebra",
-  ],
-  medium: [
-    "bicycle",
-    "computer",
-    "elephant",
-    "football",
-    "giraffe",
-    "hamburger",
-    "internet",
-    "keyboard",
-    "lighthouse",
-    "microphone",
-    "notebook",
-    "penguin",
-    "question",
-    "rattlesnake",
-    "strawberry",
-    "telephone",
-    "umbrella",
-    "volcano",
-    "watermelon",
-    "xylophone",
-    "zeppelin",
-  ],
-  "difficult": [
-    "benevolent",
-    "dichotomy",
-    "facetious",
-    "hierarchical",
-    "juxtaposition",
-    "kaleidoscope",
-    "mnemonic",
-    "paradigm",
-    "ubiquitous",
-    "antithesis",
-    "cacophony",
-    "deleterious",
-    "ephemeral",
-    "garrulous",
-    "heterogeneous",
-    "insidious",
-    "labyrinth",
-    "mellifluous",
-    "nomenclature",
-    "perspicacious"
-  ],
-};
+async function fetchOptionsFromJSON(jsonFileName) {
+  const response = await fetch(jsonFileName);
+  const data = await response.json();
+  return data;
+}
 
 //count
 let winCount = 0;
@@ -123,10 +53,65 @@ const blocker = () => {
   newGameContainer.classList.remove("hide");
 };
 
-//Word Generator
+
+document.addEventListener("keydown", (event) => {
+  if (/^[a-zA-Z]$/.test(event.key) && chosenWord) {
+    const charArray = chosenWord.split("");
+    const dashes = document.getElementsByClassName("dashes");
+
+    if (charArray.includes(event.key.toUpperCase())) {
+      charArray.forEach((char, index) => {
+        if (char === event.key.toUpperCase()) {
+          dashes[index].innerText = char;
+          winCount += 1;
+          if (winCount === charArray.length) {
+            resultText.innerHTML = `<h2 class='win-msg'>You Win!!</h2><p>The word was <span>${chosenWord}</span></p>`;
+            blocker();
+          }
+        }
+      });
+    } else {
+      count += 1;
+      drawMan(count);
+      if (count === 6) {
+        resultText.innerHTML = `<h2 class='lose-msg'>You Lose!!</h2><p>The word was <span>${chosenWord}</span></p>`;
+        blocker();
+      }
+    }
+  }
+});
+
+const letterButtons = document.querySelectorAll(".letters");
+letterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    let charArray = chosenWord.split("");
+    let dashes = document.getElementsByClassName("dashes");
+    if (charArray.includes(button.innerText)) {
+      charArray.forEach((char, index) => {
+        if (char === button.innerText) {
+          dashes[index].innerText = char;
+          winCount += 1;
+          if (winCount == charArray.length) {
+            resultText.innerHTML = `<h2 class='win-msg'>You Win!!</h2><p>The word was <span>${chosenWord}</span></p>`;
+            blocker();
+          }
+        }
+      });
+    } else {
+      count += 1;
+      drawMan(count);
+      if (count == 6) {
+        resultText.innerHTML = `<h2 class='lose-msg'>You Lose!!</h2><p>The word was <span>${chosenWord}</span></p>`;
+        blocker();
+      }
+    }
+  });
+});
+
+
 const generateWord = (optionValue) => {
   let optionsButtons = document.querySelectorAll(".options");
-  //If optionValur matches the button innerText then highlight the button
+
   optionsButtons.forEach((button) => {
     if (button.innerText.toLowerCase() === optionValue) {
       button.classList.add("active");
@@ -134,24 +119,27 @@ const generateWord = (optionValue) => {
     button.disabled = true;
   });
 
-  //initially hide letters, clear previous word
   letterContainer.classList.remove("hide");
   userInputSection.innerText = "";
 
   let optionArray = options[optionValue];
-  //choose random word
-  chosenWord = optionArray[Math.floor(Math.random() * optionArray.length)];
-  chosenWord = chosenWord.toUpperCase();
 
-  //replace every letter with span containing dash
-  let displayItem = chosenWord.replace(/./g, '<span class="dashes">_</span>');
+  if (optionArray && optionArray.length > 0) {
+    chosenWord = optionArray[Math.floor(Math.random() * optionArray.length)];
+    chosenWord = chosenWord.toUpperCase();
 
-  //Display each element as span
-  userInputSection.innerHTML = displayItem;
+    let displayItem = chosenWord.replace(/./g, '<span class="dashes">_</span>');
+    userInputSection.innerHTML = displayItem;
+  } else {
+    userInputSection.innerHTML = "<p>No words available for this difficulty.</p>";
+  }
+  
 };
 
+
+
 //Initial Function (Called when page loads/user presses new game)
-const initializer = () => {
+const initializer = async () => {
   winCount = 0;
   count = 0;
 
@@ -205,6 +193,15 @@ const initializer = () => {
     });
     letterContainer.append(button);
   }
+
+  try {
+    options.easy = await fetchOptionsFromJSON("easy.json");
+    options.medium = await fetchOptionsFromJSON("medium.json");
+    options.difficult = await fetchOptionsFromJSON("difficult.json");
+  } catch (error) {
+    console.error("Error loading options from JSON files:", error);
+  }
+
 
   displayOptions();
   //Call to canvasCreator (for clearing previous canvas and creating initial canvas)
