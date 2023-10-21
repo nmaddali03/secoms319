@@ -8,3 +8,6 @@ Project goals are the following. To develop a visually appealing and responsive 
 that captivates players and keeps them engaged throughout the game experience. Enable the
 game to intelligently and randomly select words or phrases from the database, enhancing
 replayability and unpredictability for players.
+
+To access the midterm project:
+https://nmaddali03.github.io/secoms319/MidtermProject/index.html
