@@ -165,6 +165,7 @@ const initializer = async () => {
   }
 
   try {
+    //json case sensitive
     options.easy = await fetchOptionsFromJSON("./easy.json");
     options.medium = await fetchOptionsFromJSON("./medium.json");
     options.difficult = await fetchOptionsFromJSON("./difficult.json");
