@@ -9,9 +9,9 @@ const resultText = document.getElementById("result-text");
 
 // Options values for buttons
 let options = {
-  easy: "./easy.JSON",
-  medium: "medium.JSON",
-  difficult: "difficult.JSON",
+  easy: "secoms319/MidtermProject/easy.JSON",
+  medium: "secoms319/MidtermProject/medium.JSON",
+  difficult: "secoms319/MidtermProject/difficult.JSON",
 };
 
 async function fetchOptionsFromJSON(jsonFileName) {
