@@ -9,9 +9,9 @@ const resultText = document.getElementById("result-text");
 
 // Options values for buttons
 let options = {
-  easy: "secoms319/MidtermProject/easy.JSON",
-  medium: "secoms319/MidtermProject/medium.JSON",
-  difficult: "secoms319/MidtermProject/difficult.JSON",
+  easy: "./easy.json",
+  medium: "./medium.JSON",
+  difficult: "./difficult.JSON",
 };
 
 async function fetchOptionsFromJSON(jsonFileName) {
@@ -165,9 +165,9 @@ const initializer = async () => {
   }
 
   try {
-    options.easy = await fetchOptionsFromJSON("secoms319/MidtermProject/easy.JSON");
-    options.medium = await fetchOptionsFromJSON("secoms319/MidtermProject/medium.JSON");
-    options.difficult = await fetchOptionsFromJSON("secoms319/MidtermProject/difficult.JSON");
+    options.easy = await fetchOptionsFromJSON("./easy.json");
+    options.medium = await fetchOptionsFromJSON("./medium.JSON");
+    options.difficult = await fetchOptionsFromJSON("./difficult.JSON");
   } catch (error) {
     console.error("Error loading options from JSON files:", error);
   }
