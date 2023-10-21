@@ -165,9 +165,9 @@ const initializer = async () => {
   }
 
   try {
-    options.easy = await fetchOptionsFromJSON("easy.json");
-    options.medium = await fetchOptionsFromJSON("medium.json");
-    options.difficult = await fetchOptionsFromJSON("difficult.json");
+    options.easy = await fetchOptionsFromJSON("secoms319/MidtermProject/easy.JSON");
+    options.medium = await fetchOptionsFromJSON("secoms319/MidtermProject/medium.JSON");
+    options.difficult = await fetchOptionsFromJSON("secoms319/MidtermProject/difficult.JSON");
   } catch (error) {
     console.error("Error loading options from JSON files:", error);
   }
