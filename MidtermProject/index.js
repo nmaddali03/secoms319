@@ -10,8 +10,8 @@ const resultText = document.getElementById("result-text");
 // Options values for buttons
 let options = {
   easy: "./easy.json",
-  medium: "./medium.JSON",
-  difficult: "./difficult.JSON",
+  medium: "./medium.json",
+  difficult: "./difficult.json",
 };
 
 async function fetchOptionsFromJSON(jsonFileName) {
@@ -166,8 +166,8 @@ const initializer = async () => {
 
   try {
     options.easy = await fetchOptionsFromJSON("./easy.json");
-    options.medium = await fetchOptionsFromJSON("./medium.JSON");
-    options.difficult = await fetchOptionsFromJSON("./difficult.JSON");
+    options.medium = await fetchOptionsFromJSON("./medium.json");
+    options.difficult = await fetchOptionsFromJSON("./difficult.json");
   } catch (error) {
     console.error("Error loading options from JSON files:", error);
   }
