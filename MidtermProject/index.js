@@ -9,7 +9,7 @@ const resultText = document.getElementById("result-text");
 
 // Options values for buttons
 let options = {
-  easy: "easy.JSON",
+  easy: "./easy.JSON",
   medium: "medium.JSON",
   difficult: "difficult.JSON",
 };
