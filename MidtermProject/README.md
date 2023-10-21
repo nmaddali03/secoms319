@@ -1,3 +1,9 @@
+Authors: Katherine Amundson and Neha Maddali
+kea1@iastate.edu
+nmaddali@iastate.edu
+
+SE/ComS319 TEAM 15
+
 Primary objectives are the following. To create an interactive and user friendly Hangman game
 interface that engages players. Implement multiple difficulty levels (e.g., easy, medium, hard) to
 cater to a broad range of players, from beginners to experts. Build a comprehensive word
