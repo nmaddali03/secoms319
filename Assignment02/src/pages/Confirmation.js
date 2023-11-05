@@ -15,6 +15,7 @@ export const Confirmation = () => {
     total,
     zip,
     clearCart,
+    resetForm,
   } = useContext(CartContext);
   const { setPage } = useContext(PageContext);
 
@@ -23,7 +24,7 @@ export const Confirmation = () => {
       <div className="h-80 overflow-hidden lg:absolute lg:h-full lg:w-1/2 lg:pr-4 xl:pr-12">
         <img
           src="https://friedrichscoffee.com/wp-content/uploads/2021/03/IMG_6866.jpeg"
-          alt="TODO"
+          alt="image"
           className="h-full w-full object-cover object-center"
         />
       </div>
@@ -127,6 +128,7 @@ export const Confirmation = () => {
                 onClick={() => {
                   setPage("items");
                   clearCart();
+                  resetForm();
                 }}
                 className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
               >

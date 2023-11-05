@@ -25,6 +25,7 @@ export const CartContext = createContext({
   subtotal: 0,
   taxes: 0,
   clearCart: () => {},
+  resetForm: () => {},
 });
 
 export const CartProvider = ({ children }) => {
@@ -53,56 +54,60 @@ export const CartProvider = ({ children }) => {
     setTaxes(0);
   };
 
+<<<<<<< HEAD
+=======
+  const resetForm = () => {
+    setName("");
+    setStreetAddress("");
+    setExpirationDate("");
+    setCity("");
+    setState("");
+    setZip("");
+    setCardNumber("");
+  };
+
+>>>>>>> 7eae950c5074d808e1e8ea6b2b7c311be8c3ef4e
   const addToCart = (item) => {
-    const newCart = [...cart];
-    const itemIndex = newCart.findIndex((cartItem) => cartItem.id === item.id);
-  
-    if (itemIndex >= 0) {
-      // If the item is already in the cart, increase its quantity
-      newCart[itemIndex].quantity += 1;
-    } else {
-      // Otherwise, add it to the cart with quantity 1
-      newCart.push({ ...item, quantity: 1 });
-    }
-  
-    // Update subtotal, total, and taxes
-    const newSubtotal = newCart.reduce((acc, cartItem) => acc + cartItem.price * cartItem.quantity, 0);
+    const newCart = [...cart, item];
+
+    let newSubtotal = newCart.reduce((acc, item) => acc + item.price, 0);
+    newSubtotal = Math.round(newSubtotal * 100) / 100;
     const taxAmount = newSubtotal * TAX_RATE;
-    const newTotal = newSubtotal + taxAmount;
-  
+    const newTotal = Math.round((newSubtotal + taxAmount) * 100) / 100;
+
     setSubtotal(newSubtotal);
     setTotal(newTotal);
     setTaxes(taxAmount);
     setCart(newCart);
   };
-  
+
+  const handleRemoveFromCart = (item) => {
+    removeFromCart(item);
+    setToastMessage(`Successfully removed ${item.name} from cart!`);
+    setShowToast(true); // Use setShowToast
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
   const removeFromCart = (item) => {
     setCart((prevCart) => {
-      const newCart = [...prevCart];
-      const itemIndex = newCart.findIndex((cartItem) => cartItem.id === item.id);
-  
-      if (itemIndex >= 0) {
-        // If the item is in the cart, decrease its quantity
-        newCart[itemIndex].quantity -= 1;
-        if (newCart[itemIndex].quantity === 0) {
-          // If the quantity reaches zero, remove it from the cart
-          newCart.splice(itemIndex, 1);
-        }
-      }
-  
-      // Update subtotal, total, and taxes
-      const newSubtotal = newCart.reduce((acc, cartItem) => acc + cartItem.price * cartItem.quantity, 0);
+      const index = prevCart.lastIndexOf(item);
+
+      if (index < 0) return prevCart;
+
+      const newCart = [
+        ...prevCart.slice(0, index),
+        ...prevCart.slice(index + 1, prevCart.length),
+      ];
+
+      const newSubtotal = newCart.reduce((acc, item) => acc + item.price, 0);
       const taxAmount = newSubtotal * TAX_RATE;
-      const newTotal = newSubtotal + taxAmount;
-  
       setSubtotal(newSubtotal);
       setTaxes(taxAmount);
-      setTotal(newTotal);
-  
+      setTotal(newSubtotal + taxAmount);
+
       return newCart;
     });
   };
-  
 
   return (
     <CartContext.Provider
@@ -132,7 +137,11 @@ export const CartProvider = ({ children }) => {
         subtotal,
         taxes,
         clearCart,
+<<<<<<< HEAD
         cartLength,
+=======
+        resetForm,
+>>>>>>> 7eae950c5074d808e1e8ea6b2b7c311be8c3ef4e
       }}
     >
       {children}
