@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 
 export const items = require("../items.json");
 
+//create the cart object 
 export const CartContext = createContext({
   cart: [],
   custName: "",
@@ -48,6 +49,7 @@ export const CartProvider = ({ children }) => {
     setTaxes(0);
   };
 
+  //allow adding to cart feature
   const addToCart = (item) => {
     const newCart = [...cart, item];
 
@@ -62,6 +64,7 @@ export const CartProvider = ({ children }) => {
     setCart(newCart);
   };
 
+  //remove item from the cart feature
   const removeFromCart = (item) => {
     setCart((prevCart) => {
       const index = prevCart.lastIndexOf(item);
