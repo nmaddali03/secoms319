@@ -146,7 +146,7 @@ export const Cart = () => {
                       >
                         Add
                       </button>
-                      <span>Quantity: {product.quantity}</span>
+                      {/* <span>Quantity: {product.quantity}</span> */}
                     </div>
                   </div>
 
