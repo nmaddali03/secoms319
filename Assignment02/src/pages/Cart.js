@@ -3,6 +3,7 @@ import { CartContext } from "../contexts/Cart";
 import { PageContext } from "../contexts/Page";
 import { Popover, Transition } from "@headlessui/react";
 
+
 export const Cart = () => {
   const {
     cart,
@@ -19,10 +20,22 @@ export const Cart = () => {
     total,
     subtotal,
     taxes,
+    removeFromCart,
+    setToastMessage,
+    setShowToast,
   } = useContext(CartContext);
   const { setPage } = useContext(PageContext);
 
   const [errors, setErrors] = useState({});
+
+  const handleRemoveFromCart = (item) => {
+    removeFromCart(item);
+    setToastMessage(`Successfully removed ${item.name} from cart!`);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
+
 
   // create a form for the checkout page
   const validateForm = (fieldName, value) => {
@@ -90,6 +103,7 @@ export const Cart = () => {
                 onClick={() => setPage("items")}
                 type="button"
                 className="flex gap-x-4 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                
               >
                 Keep shopping
               </button>
@@ -111,7 +125,17 @@ export const Cart = () => {
                   />
                   <div className="flex-auto space-y-1">
                     <h3>{product.name}</h3>
+                    <div className="flex space-x-4">
+                      <button
+                        onClick={() => handleRemoveFromCart(product)}
+                        className="bg-indigo-500 text-white px-2 py-1 rounded-md"
+                      >
+                        Remove
+                      </button>
+                      <span>Quantity: {product.quantity}</span>
+                    </div>
                   </div>
+
                   <p className="flex-none text-base font-medium">
                     ${product.price}
                   </p>

@@ -2,7 +2,6 @@ import { createContext, useState } from "react";
 
 export const items = require("../items.json");
 
-//create the cart object 
 export const CartContext = createContext({
   cart: [],
   custName: "",
@@ -21,6 +20,7 @@ export const CartContext = createContext({
   setState: (state) => {},
   setZip: (zip) => {},
   setCardNumber: (cardNumber) => {},
+  setToastMessage: (message) => {},
   total: 0,
   subtotal: 0,
   taxes: 0,
@@ -39,6 +39,8 @@ export const CartProvider = ({ children }) => {
   const [total, setTotal] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const [taxes, setTaxes] = useState(0);
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const TAX_RATE = 0.07;
 
@@ -49,7 +51,6 @@ export const CartProvider = ({ children }) => {
     setTaxes(0);
   };
 
-  //allow adding to cart feature
   const addToCart = (item) => {
     const newCart = [...cart, item];
 
@@ -64,7 +65,13 @@ export const CartProvider = ({ children }) => {
     setCart(newCart);
   };
 
-  //remove item from the cart feature
+  const handleRemoveFromCart = (item) => {
+    removeFromCart(item);
+    setToastMessage(`Successfully removed ${item.name} from cart!`);
+    setShowToast(true); // Use setShowToast
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
   const removeFromCart = (item) => {
     setCart((prevCart) => {
       const index = prevCart.lastIndexOf(item);
@@ -92,6 +99,10 @@ export const CartProvider = ({ children }) => {
         cart,
         addToCart,
         removeFromCart,
+        toastMessage,
+        showToast,
+        setShowToast,
+        setToastMessage,
         custName,
         setName,
         streetAddress,
