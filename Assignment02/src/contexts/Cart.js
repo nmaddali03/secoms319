@@ -108,6 +108,11 @@ export const CartProvider = ({ children }) => {
     if (itemIndex >= 0) {
       // If the item is already in the cart, increase its quantity
       newCart[itemIndex].quantity += 1;
+            // If the quantity reaches zero, remove it from the cart
+            if (newCart[itemIndex].quantity === 0) {
+              newCart.splice(itemIndex, 1);
+            }
+      
     } else {
       // Otherwise, add it to the cart with quantity 1
       newCart.push({ ...item, quantity: 1 });
