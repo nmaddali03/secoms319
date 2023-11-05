@@ -21,6 +21,7 @@ export const Cart = () => {
     subtotal,
     taxes,
     removeFromCart,
+    addToCart,
     setToastMessage,
     setShowToast,
   } = useContext(CartContext);
@@ -35,6 +36,13 @@ export const Cart = () => {
     setTimeout(() => setShowToast(false), 3000);
   };
 
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    setToastMessage(`Successfully added ${item.name} to cart!`);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+  
 
 
   // create a form for the checkout page
@@ -131,6 +139,12 @@ export const Cart = () => {
                         className="bg-indigo-500 text-white px-2 py-1 rounded-md"
                       >
                         Remove
+                      </button>
+                      <button
+                        onClick={() => handleAddToCart(product)}
+                        className="bg-indigo-500 text-white px-2 py-1 rounded-md"
+                      >
+                        Add
                       </button>
                       <span>Quantity: {product.quantity}</span>
                     </div>
