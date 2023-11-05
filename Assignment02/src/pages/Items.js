@@ -2,40 +2,60 @@ import { useContext, useState } from "react";
 import { CartContext, items } from "../contexts/Cart";
 import { PageContext } from "../contexts/Page";
 
+const Authors = () => {
+  return (
+    <div>
+      <p> 
+        <span className="font-bold">Assignment02</span>
+      </p>
+      <p>
+        <span className="font-bold">Names: </span> Katherine Amundson, Neha
+        Maddali
+      </p>
+      <p>
+        <span className="font-bold">NetIds: </span>kea1, nmaddali
+      </p>
+      <p>
+        <span className="font-bold">Date: </span> November 5, 2023
+      </p>
+    </div>
+  );
+};
+
 export const Items = () => {
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
   const { setPage } = useContext(PageContext);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
+  const [toastMessage, setToastMessage] = useState("");
 
-  const filteredItems = items.filter(item =>
+  const filteredItems = items.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleAddToCart = (item) => {
     addToCart(item);
-    setToastMessage(`Successfully added ${item.name.toLowerCase()} to cart!`);
+    setToastMessage(`Successfully added ${item.name} to cart!`);
     setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000); 
+    setTimeout(() => setShowToast(false), 3000);
   };
 
   const handleRemoveFromCart = (item) => {
     removeFromCart(item);
-    setToastMessage(`Successfully removed ${item.name.toLowerCase()} from cart!`);
+    setToastMessage(`Successfully removed ${item.name} from cart!`);
     setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000); 
+    setTimeout(() => setShowToast(false), 3000);
   };
 
   return (
     <div>
       {showToast && (
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 p-4 rounded bg-green-400 text-white z-50">
-            {toastMessage}
-          </div>
+          {toastMessage}
+        </div>
       )}
       <div className="bg-gradient-to-b from-gray-100 to-gray-300">
-      <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
+        <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
           <div className="flex items-center justify-between">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 mr-40">
               Product Catalog
@@ -44,7 +64,7 @@ export const Items = () => {
               onClick={() => setPage("cart")}
               type="button"
               className="flex gap-x-4 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
+            >
               <svg
                 fill="none"
                 stroke="currentColor"
@@ -65,12 +85,12 @@ export const Items = () => {
           </div>
 
           <div className="mt-4">
-            <input 
-              type="text" 
+            <input
+              type="text"
               className="w-full px-3 py-2 border rounded-md"
-              placeholder="Search for items..." 
-              value={searchTerm} 
-              onChange={(e) => setSearchTerm(e.target.value)} 
+              placeholder="Search for items..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
 
@@ -83,7 +103,7 @@ export const Items = () => {
                       src={item.image}
                       alt={item.name}
                       className="h-full w-full object-cover object-center lg:h-full lg:w-full rounded-md border border-gray-500"
-                      />
+                    />
                   </div>
                   <div className="mt-4 flex justify-between">
                     <div>
@@ -96,7 +116,9 @@ export const Items = () => {
                       ${item.price}
                     </p>
                   </div>
-                  <p>Testing</p>
+                  <p className="text-sm font-medium text-gray-900">
+                    {item.description}
+                  </p>
                 </div>
                 <div className="mt-4 flex gap-2">
                   <button
@@ -118,6 +140,7 @@ export const Items = () => {
             ))}
           </div>
         </div>
+        <Authors />
       </div>
     </div>
   );
