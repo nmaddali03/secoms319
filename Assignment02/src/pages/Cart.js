@@ -12,10 +12,10 @@ export const Cart = () => {
     expirationDate,
     setName,
     setExpirationDate,
-    setStreetAddress,
-    setCity,
-    setState,
-    setZip,
+    //setStreetAddress,
+    //setCity,
+    //setState,
+    //setZip,
     setCardNumber,
     total,
     subtotal,
@@ -28,6 +28,13 @@ export const Cart = () => {
   const { setPage } = useContext(PageContext);
 
   const [errors, setErrors] = useState({});
+  const [streetAddress, setStreetAddress] = useState(''); 
+  const [apartment, setApartment] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState(''); 
+  const [zip, setZip] = useState(''); 
+
+
 
   const handleRemoveFromCart = (item) => {
     removeFromCart(item);
@@ -73,6 +80,42 @@ export const Cart = () => {
                 delete newErrors.expirationDate;
             }
             break;
+        // case "apartment":
+        //   if (value.trim() === "") {
+        //     newErrors.apartment = "Apartment is required.";
+        //   } else {
+        //     delete newErrors.apartment;
+        //   }
+        //   break;
+
+          case "city":
+            if (value.trim() === "") {
+              newErrors.city = "City is required.";
+            } else {
+              delete newErrors.city;
+            }
+            break;
+    
+
+        case 'state':
+          if (!value.trim()) {
+            newErrors.state = 'State is required.';
+          } else if (!/^[A-Za-z]{2}$/.test(value)) {
+            newErrors.state = 'State: Use 2-letter abbreviation (e.g., CA).';
+          } else {
+            delete newErrors.state;
+          }
+          break;
+
+          case "zip":
+            if (!/^\d{5}$/.test(value)) {
+              newErrors.zip = "Postal code should be 5 digits.";
+            } else {
+              delete newErrors.zip;
+            }
+            break;
+    
+
 
         default:
             break;
@@ -372,10 +415,21 @@ export const Cart = () => {
                       name="address"
                       autoComplete="street-address"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      onChange={(e) => setStreetAddress(e.target.value)}
+                      value={streetAddress}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setStreetAddress(value);
+                        validateForm('streetAddress', value);
+                      }}
+                      onBlur={() => validateForm('streetAddress', streetAddress)}
                       maxLength="60"
+                  
+                      // onChange={(e) => setStreetAddress(e.target.value)}
+                      
+                      // maxLength="60"
                     />
                   </div>
+                  {errors.streetAddress && <p className="text-red-500">{errors.streetAddress}</p>}
                 </div>
 
                 <div className="sm:col-span-3">
@@ -391,9 +445,19 @@ export const Cart = () => {
                       id="apartment"
                       name="apartment"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      value={apartment}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setApartment(value);
+                        validateForm('apartment', value);
+                      }}
+                      onBlur={() => validateForm('apartment', apartment)}
                       maxLength="12"
+  
                     />
                   </div>
+                  {errors.apartment && <p className="text-red-500">{errors.apartment}</p>}
+
                 </div>
 
                 <div>
@@ -405,7 +469,13 @@ export const Cart = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setCity(value);
+                      validateForm('city', value);
+                    }}
+                    
+                      //onChange={(e) => setCity(e.target.value)}
                       type="text"
                       id="city"
                       name="city"
@@ -414,6 +484,8 @@ export const Cart = () => {
                       maxLength="24"
                     />
                   </div>
+                  {errors.city && <p className="text-red-500">{errors.city}</p>}
+
                 </div>
 
                 <div>
@@ -425,7 +497,12 @@ export const Cart = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      onChange={(e) => setState(e.target.value)}
+                      //onChange={(e) => setState(e.target.value)}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setState(value);
+                        validateForm('state', value);
+                      }}
                       type="text"
                       id="region"
                       name="region"
@@ -434,6 +511,7 @@ export const Cart = () => {
                       maxLength="2"
                     />
                   </div>
+                  {errors.state && <p className="text-red-500">{errors.state}</p>}
                 </div>
 
                 <div>
@@ -445,7 +523,12 @@ export const Cart = () => {
                   </label>
                   <div className="mt-1">
                     <input
-                      onChange={(e) => setZip(e.target.value)}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setZip(value);
+                        validateForm('zip', value);
+                      }}
+                      //onChange={(e) => setZip(e.target.value)}
                       type="text"
                       id="postal-code"
                       name="postal-code"
@@ -466,7 +549,12 @@ export const Cart = () => {
                   Object.keys(errors).length > 0 || 
                   !cardNumber || 
                   !custName || 
-                  !expirationDate 
+                  !expirationDate ||
+                  !streetAddress ||
+                  //!apartment ||
+                  !city ||
+                  !state ||
+                  !zip
               }
                 className="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:order-last sm:w-auto"
               >
