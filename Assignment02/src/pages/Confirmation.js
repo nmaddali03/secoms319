@@ -5,7 +5,7 @@ import { PageContext } from "../contexts/Page";
 export const Confirmation = () => {
   const {
     cart,
-    name,
+    custName,
     streetAddress,
     city,
     state,
@@ -79,7 +79,7 @@ export const Confirmation = () => {
                 <dt className="font-medium text-gray-900">Shipping Address</dt>
                 <dd className="mt-2">
                   <address className="not-italic">
-                    <span className="block">{name}</span>
+                    <span className="block">{custName}</span>
                     <span className="block">{streetAddress}</span>
                     <span className="block">
                       {city}, {state}. {zip}

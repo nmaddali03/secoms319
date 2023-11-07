@@ -34,8 +34,6 @@ export const Cart = () => {
   const [state, setState] = useState(''); 
   const [zip, setZip] = useState(''); 
 
-
-
   const handleRemoveFromCart = (item) => {
     removeFromCart(item);
     setToastMessage(`Successfully removed ${item.name} from cart!`);
