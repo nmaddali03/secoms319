@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minesweeper</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="minesweeper.css" />
+
+    <script src="minesweeper.js"></script>
+  </head>
+
+  <body>
+    
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="hangman.html">Hangman</a></li>
+      <li><a href="minesweeper.html">Minesweeper</a></li>
+      <li><a class="active" href="about.html">About</a></li>
+    </ul>
+
+
+    <div class="container">
+      <h1 class="title">Minesweeper</h1>
+      <div class="top">
+        <div class="flag-box">
+          <h1>0<span id="flags-left"></span></h1>
+        </div>
+        <button class="emoji-btn"><h1>🙂</h1></button>
+        <div class="timer-box">
+          <h1><span id="timer">0</span></h1>
+        </div>
+      </div>
+      <div class="grid"></div>
+      <div id="result"></div>
+    </div>
+
+  </body>
+</html>
