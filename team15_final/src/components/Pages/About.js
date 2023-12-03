@@ -25,8 +25,8 @@ export const About = () => {
       <br></br>
       <h2>About the Assignment</h2>
       <p>
-        The purpose of the Web-Hangman project is to create an engaging and
-        accessible web-based version of the classic Hangman word puzzle game.
+        The purpose of the Web-Hangman and Minesweeper project is to create an engaging and
+        accessible web-based version of the classic Hangman word puzzle game and Minesweeper.
         This project aims to provide players with an interactive and
         user-friendly gaming experience while offering a range of difficulty
         levels to cater to players of diverse skill levels.

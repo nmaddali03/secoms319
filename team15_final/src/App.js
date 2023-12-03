@@ -3,7 +3,9 @@ import NavBar from "./components/NavBar";
 import { BrowserRouter as Router,  Route, Routes } from "react-router-dom";
 import { Home } from "./components/Pages/Home";
 import { Hangman } from "./components/Pages/Hangman";
-import { Minesweeper } from "./components/Pages/Minesweeper";
+//import { Minesweeper } from "./components/Pages/Minesweeper";
+import Minesweeper from "./components/Pages/Minesweeper";
+
 import { About } from "./components/Pages/About";
 
 function App() {
