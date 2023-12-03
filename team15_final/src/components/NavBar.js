@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
-import { CodeIcon, HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
 
 function NavBar() {
   const [click, setClick] = useState(false);
@@ -64,15 +63,6 @@ function NavBar() {
           <div className="nav-icon" onClick={handleClick}>
             {/* <i className={click ? "fas fa-times" : "fas fa-bars"}></i> */}
 
-            {click ? (
-              <span className="icon">
-                <HamburgetMenuOpen />{" "}
-              </span>
-            ) : (
-              <span className="icon">
-                <HamburgetMenuClose />
-              </span>
-            )}
           </div>
         </div>
       </nav>
