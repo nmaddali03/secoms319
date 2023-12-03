@@ -9,6 +9,7 @@ const canvasCreator = () => {
 
   // For drawing lines
   const drawLine = (fromX, fromY, toX, toY) => {
+    context.beginPath(); ///////////////////
     context.moveTo(fromX, fromY);
     context.lineTo(toX, toY);
     context.stroke();
@@ -58,7 +59,7 @@ const canvasCreator = () => {
 };
 
 // Draw the man
-const drawMan = (count) => {
+const drawMan = (count, canvasCreatorFunctions) => {
   let { head, body, leftArm, rightArm, leftLeg, rightLeg } = canvasCreator();
   switch (count) {
     case 1:
@@ -84,4 +85,5 @@ const drawMan = (count) => {
   }
 };
 
-export default canvasCreator;
+export { canvasCreator, drawMan}
+// export default canvasCreator;
