@@ -9,7 +9,10 @@ import { showNotification as show, checkWin } from '../helpers';
 
 import './Hangman.css';
 
-const words = ['application', 'programming', 'interface', 'wizard'];
+// const words = ['application', 'programming', 'interface', 'wizard'];
+const config = require('./words.json');
+const words = config.words.map(item => item.word);
+
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
 function App() {
