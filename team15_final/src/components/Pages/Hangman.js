@@ -11,7 +11,6 @@ import './Hangman.css';
 
 // const words = ['application', 'programming', 'interface', 'wizard'];
 const words = require('./words.json');
-//const words = config.words.map(item => item.word);
 
 let selectedWord = words[Math.floor(Math.random() * words.length)].word;
 
