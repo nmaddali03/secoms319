@@ -10,10 +10,10 @@ import { showNotification as show, checkWin } from '../helpers';
 import './Hangman.css';
 
 // const words = ['application', 'programming', 'interface', 'wizard'];
-const config = require('./words.json');
-const words = config.words.map(item => item.word);
+const words = require('./words.json');
+//const words = config.words.map(item => item.word);
 
-let selectedWord = words[Math.floor(Math.random() * words.length)];
+let selectedWord = words[Math.floor(Math.random() * words.length)].word;
 
 function App() {
   const [playable, setPlayable] = useState(true);
