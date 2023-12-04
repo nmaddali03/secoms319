@@ -2,7 +2,7 @@ import React from "react";
 
 export const About = () => {
   return (
-    <div>
+    <div style={{ textAlign: "center", marginLeft: "10%", marginRight: "10%", marginBottom:"5%" }}>
       <h1>About Us</h1>
       <p>
         {" "}

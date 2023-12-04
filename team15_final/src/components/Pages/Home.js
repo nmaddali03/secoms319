@@ -2,7 +2,7 @@ import React from "react";
 
 export const Home = () => {
   return (
-    <div>
+    <div style={{ textAlign: "center", marginLeft: "10%", marginRight: "10%", marginBottom:"5%" }}>
       <h1>How to Play Hangman</h1>
       <p>
         The game web page will ask you to select a level of difficulty: easy,
@@ -13,9 +13,7 @@ export const Home = () => {
       <p>
         There will be set up for the stick figure hangman to be drawn to
         represent the "life” of the game. <br></br>
-        You can guess letters in two ways: <br></br>
-        1. Click a letter on the display screen keyboard <br></br>
-        2. Click a letter on your physical keyboard. <br></br>
+        You can guess letters by clicking a letter on your physical keyboard.
         For every letter guessed, the keyboard will disable the letter.
       </p>{" "}
       <br></br>
@@ -35,16 +33,24 @@ export const Home = () => {
       </p>{" "}
       <br></br>
       <div>
-        <h2>Here is an example</h2>
-        <div>
-          <video width="750" height="500" controls>
-            <source src="/demo.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <br></br> <br></br>
-      </div>
-      <div>
         <h1>How to Play Minesweeper</h1> <br></br>
+        <p>
+          You are presented with a board of squares. Some squares contain mines
+          (bombs), others don't. If you click on a square containing a bomb, you
+          lose. If you manage to click all the squares (without clicking on any
+          bombs) or flag all the mines, you win.
+        </p>{" "}
+        <br></br>
+        <p>
+          Clicking a square which doesn't have a bomb reveals the number of
+          neighbouring squares containing bombs. Use this information plus some
+          guess work to avoid the bombs.
+        </p>{" "}
+        <br></br>
+        <p>
+          To open a square, point at the square and click on it. To mark a
+          square you think is a bomb, point and right-click.
+        </p>
       </div>
     </div>
   );
