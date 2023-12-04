@@ -8,7 +8,7 @@ const { MongoClient } = require("mongodb");
 app.use(cors());
 app.use(bodyParser.json());
 
-const port = "8081"
+const port = 8081;
 const host = "localhost";
 
 // Mongo
@@ -63,7 +63,7 @@ app.post("/addWord", async (req, res) => {
     "id":id,
     "word":word,
   };
-  const results = await db.collection("word").insertOne(newDocument);
+  const results = await db.collection("words").insertOne(newDocument);
   res.status(200);
   res.send(results);
 });
@@ -78,7 +78,7 @@ app.delete("/deleteWord", async (req, res) => {
 
   const query = { id: id };
 
-  const results = await db.collection("word").deleteOne(query);
+  const results = await db.collection("words").deleteOne(query);
   res.status(200);
   res.send(results);
 });

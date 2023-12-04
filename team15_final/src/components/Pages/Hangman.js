@@ -19,10 +19,20 @@ function App() {
   const [correctLetters, setCorrectLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
+  const [selectedWord, setSelectedWord] = useState(words[Math.floor(Math.random() * words.length)].word);
+  const [newWord, setNewWord] = useState('');
+
+
 
   useEffect(() => {
     const handleKeydown = event => {
       const { key, keyCode } = event;
+
+      if (document.activeElement.tagName === 'INPUT') {
+        return;
+      }
+  
+
       if (playable && keyCode >= 65 && keyCode <= 90) {
         const letter = key.toLowerCase();
         if (selectedWord.includes(letter)) {
@@ -53,8 +63,69 @@ function App() {
     setWrongLetters([]);
 
     const random = Math.floor(Math.random() * words.length);
-    selectedWord = words[random];
-  }
+    setSelectedWord(words[random].word);
+    }
+
+    async function fetchWord() {
+      try {
+        const response = await fetch('http://localhost:8081/listWords');
+        const data = await response.json();
+        if (data.length > 0) {
+          setSelectedWord(data[0].word);
+        }
+      } catch (error) {
+        console.error('Error fetching word:', error);
+      }
+    }
+  
+
+    async function addWord() {
+      try {
+        const response = await fetch('http://localhost:8081/addWord', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ word: newWord }),
+        });
+        const data = await response.json();
+        console.log('Added word:', data);
+        fetchWord();
+      } catch (error) {
+        console.error('Error adding word:', error);
+      }
+    }
+  
+    async function deleteWord() {
+      try {
+        const response = await fetch('http://localhost:8081/deleteWord', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: 1 }), // Replace with the actual ID to delete
+        });
+        const data = await response.json();
+        console.log('Deleted word:', data);
+        fetchWord();
+      } catch (error) {
+        console.error('Error deleting word:', error);
+      }
+    }
+  
+
+  // return (
+  //   <>
+  //     <Header />
+  //     <div className="game-container">
+  //       <Figure wrongLetters={wrongLetters} />
+  //       <WrongLetters wrongLetters={wrongLetters} />
+  //       <Word selectedWord={selectedWord} correctLetters={correctLetters} />
+  //     </div>
+  //     <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} />
+  //     <Notification showNotification={showNotification} />
+  //   </>
+  // );
 
   return (
     <>
@@ -66,8 +137,20 @@ function App() {
       </div>
       <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} setPlayable={setPlayable} playAgain={playAgain} />
       <Notification showNotification={showNotification} />
+      <div className="form-container">
+        <label htmlFor="newWord">New Word: </label>
+        <input
+          type="text"
+          id="newWord"
+          value={newWord}
+          onChange={(e) => setNewWord(e.target.value)}
+        />
+        <button onClick={addWord}>Add Word</button>
+        <button onClick={deleteWord}>Delete Word</button>
+      </div>
     </>
   );
+
 }
 
 export default App;
