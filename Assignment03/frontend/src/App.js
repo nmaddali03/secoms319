@@ -333,6 +333,8 @@ function CreditsView() {
       <p>This is a product page using the MERN stack (React, Express, and Mongodb). It was created for Assignment 3 of COM S 319, taught by Abraham Aldaco, Ph.D.
         This application was created by students Katherine Amundson and Neha Maddali.</p>
       <p>December 10, 2023</p>
+      <p> nmaddali@iastate.edu</p>
+      <p> kea1@iastate.edu</p>
     </main>
   );
 }
