@@ -41,7 +41,8 @@ app.get("/products/", async (req, res) => {
 
   results.forEach(r => {
     // convert relative URLs
-    if (r.image.length > 0 && r.image[0] == '/') {
+    // if (r.image.length > 0 && r.image[0] == '/') {
+    if (r.image && r.image.length > 0 && r.image[0] === '/') {
       console.error("what?");
       r.image = `http://${host}:${port}${r.image}`
     }
