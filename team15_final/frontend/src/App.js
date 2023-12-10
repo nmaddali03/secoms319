@@ -6,6 +6,7 @@ import { Home } from "./components/Pages/Home";
 //import { Minesweeper } from "./components/Pages/Minesweeper";
 import Minesweeper from "./components/Pages/Minesweeper";
 import Hangman from "./components/Pages/Hangman";
+import  Crud  from "./components/Pages/Crud";
 
 import { About } from "./components/Pages/About";
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="/hangman" element={<Hangman />} />
             <Route path="/minesweeper" element={<Minesweeper />} />
             <Route path="/about" element={<About />} />
+            <Route path="/crud" element={<Crud />} />
           </Routes>
         </div>
       </Router>
