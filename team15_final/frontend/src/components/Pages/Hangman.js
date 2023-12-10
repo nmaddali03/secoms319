@@ -7,7 +7,7 @@ import Popup from '../Popup';
 import Notification from '../Notification';
 import { showNotification as show, checkWin } from '../helpers';
 
-import './Hangman.css';
+import '../../style/Hangman.css';
 
 // const words = ['application', 'programming', 'interface', 'wizard'];
 const words = require('./words.json');

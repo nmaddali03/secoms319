@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Board from '../Board.js';
-import './Minesweeper.css';
+// import './Minesweeper.css';
+import "../../style/Minesweeper.css";
 
 class Minesweeper extends React.Component {
 

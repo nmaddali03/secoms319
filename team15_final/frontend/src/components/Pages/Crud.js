@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Crud.css';
+import '../../style/Crud.css';
 
 function Crud() {
   const [newWord, setNewWord] = useState('');
