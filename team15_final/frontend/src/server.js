@@ -1,103 +1,138 @@
-const express = require("express");
-const cors = require("cors");
-const app = express();
-const bodyParser = require("body-parser");
-const { MongoClient } = require("mongodb");
+// const express = require("express");
+// const cors = require("cors");
+// const app = express();
+// const bodyParser = require("body-parser");
+// const { MongoClient } = require("mongodb");
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(cors({
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-}));
+// app.use(cors());
+// app.use(bodyParser.json());
+// app.use(cors({
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+// }));
 
 
-const port = 8081;
-const host = "localhost";
+// const port = 8081;
+// const host = "localhost";
 
-const url = "mongodb://127.0.0.1:27017";
-const dbName = "team15_final";
-const client = new MongoClient(url);
-const db = client.db(dbName);
+// const url = "mongodb://127.0.0.1:27017";
+// const dbName = "team15_final";
+// const client = new MongoClient(url);
+// const db = client.db(dbName);
 
-app.listen(port, () => {
-  console.log("App listening at http://%s:%s", host, port);
-});
+// app.listen(port, () => {
+//   console.log("App listening at http://%s:%s", host, port);
+// });
 
-app.get("/", (req, res) => {
-  res.send("Hello, World!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello, World!");
+// });
 
-app.get("/listWords", async (req, res) => {
-  await client.connect();
-  console.log("Node connected successfully to GET MongoDB");
+// // READ
+// app.get("/listWords", async (req, res) => {
+//   await client.connect();
+//   console.log("Node connected successfully to GET MongoDB");
 
-  const query = {};
-  const results = await db
-    .collection("words")
-    .find(query)
-    .limit(100)
-    .toArray();
+//   const query = {};
+//   const results = await db
+//     .collection("words")
+//     .find(query)
+//     .limit(100)
+//     .toArray();
 
-  console.log(results);
-  res.status(200).send(results);
-});
+//   console.log(results);
+//   res.status(200).send(results);
+// });
 
-app.get("/listWords/:word", async (req, res) => {
-  const wordName = req.params.word;
+// // CREATE
+// app.post("/listWords", async (req, res) => {
+//   try {
+//     const { word } = req.body;
 
-  await client.connect();
-  console.log("Node connected successfully to GET-word MongoDB");
-  const query = { word: wordName };
-  const results = await db.collection("words").findOne(query);
-  console.log("Results:", results);
+//     if (!word) {
+//       return res
+//         .status(400)
+//         .send("Bad Request: Missing required field 'word'.");
+//     }
 
-  if (!results) res.status(404).send("Not Found");
-  else res.status(200).send(results);
-});
+//     const newDocument = {
+//       word: word,
+//     };
 
-app.post("/listWords", async (req, res) => {
-  try {
-    const { word } = req.body;
+//     const result = await db.collection("words").insertOne(newDocument);
 
-    if (!word) {
-      return res
-        .status(400)
-        .send("Bad Request: Missing required field 'word'.");
-    }
+//     // Fetch the newly added document including _id
+//     const addedWord = await db
+//       .collection("words")
+//       .findOne({ _id: result.insertedId });
 
-    const newDocument = {
-      word: word,
-    };
+//     res.status(201).json(addedWord);
+//   } catch (error) {
+//     console.error('Error adding word:', error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
 
-    const result = await db.collection("words").insertOne(newDocument);
+// // READ
+// app.get("/listWords/:word", async (req, res) => {
+//   const wordName = req.params.word;
 
-    // Fetch the newly added document including _id
-    const addedWord = await db
-      .collection("words")
-      .findOne({ _id: result.insertedId });
+//   await client.connect();
+//   console.log("Node connected successfully to GET-word MongoDB");
+//   const query = { word: wordName };
+//   const results = await db.collection("words").findOne(query);
+//   console.log("Results:", results);
 
-    res.status(201).json(addedWord);
-  } catch (error) {
-    console.error('Error adding word:', error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+//   if (!results) res.status(404).send("Not Found");
+//   else res.status(200).send(results);
+// });
 
-app.delete("/listWords/:word", async (req, res) => {
-  const wordName = req.params.word;
+// // UPDATE
+// app.put("/listWords/:word", async (req, res) => {
+//   const wordName = req.params.word;
 
-  try {
-    await client.connect();
+//   try {
+//     const { newWord } = req.body;
 
-    const query = { word: wordName };
-    const result = await db.collection("words").deleteOne(query);
+//     if (!newWord) {
+//       return res
+//         .status(400)
+//         .send("Bad Request: Missing required field 'newWord'.");
+//     }
 
-    if (result.deletedCount > 0) {
-      res.sendStatus(204);
-    } else {
-      res.status(404).send("Word not found");
-    }
-  } catch (e) {
-    res.sendStatus(500);
-  }
-});
+//     await client.connect();
+
+//     const query = { word: wordName };
+//     const update = { $set: { word: newWord } };
+//     const result = await db.collection("words").updateOne(query, update);
+
+//     if (result.modifiedCount > 0) {
+//       res.sendStatus(204); // Updated successfully
+//     } else {
+//       res.status(404).send("Word not found");
+//     }
+//   } catch (e) {
+//     res.sendStatus(500); // Internal Server Error
+//   }
+// });
+
+
+// // DELETE
+// app.delete("/listWords/:word", async (req, res) => {
+//   const wordName = req.params.word;
+
+//   try {
+//     await client.connect();
+
+//     const query = { word: wordName };
+//     const result = await db.collection("words").deleteOne(query);
+
+//     if (result.deletedCount > 0) {
+//       res.sendStatus(204);
+//     } else {
+//       res.status(404).send("Word not found");
+//     }
+//   } catch (e) {
+//     res.sendStatus(500);
+//   }
+// });
+
