@@ -5,9 +5,7 @@ export const Home = () => {
     <div style={{ textAlign: "center", marginLeft: "10%", marginRight: "10%", marginBottom:"5%" }}>
       <h1>How to Play Hangman</h1>
       <p>
-        The game web page will ask you to select a level of difficulty: easy,
-        medium, hard. After a choice has been made, the game set up will be a
-        set of dashes/underscores to represent the hidden word.
+        The game set up will be a set of dashes/underscores to represent the hidden word.
       </p>{" "}
       <br></br>
       <p>
