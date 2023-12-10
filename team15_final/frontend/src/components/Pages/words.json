@@ -1,8 +1,7 @@
-
   [
-    {"id": 1, "word": "application"},
-    {"id": 2, "word": "programming"},
-    {"id": 3, "word": "interface"},
-    {"id": 4, "word": "wizard"}
+    {"word": "application"},
+    {"word": "programming"},
+    {"word": "interface"},
+    {"word": "wizard"}
   ]
 
