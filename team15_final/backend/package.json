@@ -1,7 +1,7 @@
 {
-  "name": "assignment3",
+  "name": "final",
   "version": "1.0.0",
-  "description": "Assignment 3: MERN",
+  "description": "Final Project",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
